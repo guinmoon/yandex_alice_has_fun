@@ -1,0 +1,10 @@
+{
+    "debug": true,
+    "show_camera": true,
+    "rtsp_link": 0,
+    "frame_recognition_rate": 2,
+    "camera_w": 640,
+    "camera_h": 480,
+    "mqtt_broker": "192.168.1.45",
+    "save_on_detect": true
+}
