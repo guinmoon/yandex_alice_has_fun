@@ -9,3 +9,28 @@
 5.	Google Teachable Machine
 6.	PostgresSQL
 7.	MQTT
+
+![Sheme](/images/sheme.jpg)
+
+1)	Скрипт распознает лица и отправляет процент совпадения для каждой сущности модели в MQTT брокер, а так же сохраняет снимок в директорию из файла конфигурации
+
+2)	Node-Red получает сообщения из MQTT брокера и отправляет Алисе команду что либо сказать в зависимости от времени суток и того как давно она “видела” этого человека. При этом фразы для Алисы, а так же время когда человек последний раз засветился на камеру хранятся в БД Postgres.
+
+# Установка
+
+**Linux:**
+```
+pip3 install opencv-python tensorflow
+```
+Возможно портебуется установка дополнительных пакетов
+```
+sudo apt-get install git python3-dev 
+```
+Загружаем приложение
+```
+git clone https://github.com/guinmoon/yandex_alice_has_fun
+cd yandex_alice_has_fun 
+```
+# Запуск
+
+```python3 alice_has_fun.py```
