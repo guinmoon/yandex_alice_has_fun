@@ -10,26 +10,22 @@ import random
 import json
 import os
 
-model = load_model('keras_model.h5')
-mqttclient = None
-rtsp_link = None
-facedetect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-MQTT_BROKER = None
-port = 1883
-client_id = f'python-mqtt-{random.randint(0, 1000)}'
-
-
-DEBUG = True
 Config = None
 
-# Grab the labels from the labels.txt file. This will be used later.
+mqttclient = None
+input_sounrce = None
+MQTT_BROKER = None
+port = 1883
+client_id = f'alice_fun-mqtt-{random.randint(0, 1000)}'
+DEBUG = True
+model = load_model('keras_model.h5')
+facedetect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 labels = open('labels.txt', 'r').read().splitlines()
 
-# capture_mutex = threading.Lock()
 frame_recognition_rate = 4
 recogintion_sleep_delay = 1/frame_recognition_rate
 frame_update_rate = 10
-frame_update_sleep_delay = 1/frame_update_rate
+publish_min_dalay = 1
 
 outputFrame = None
 last_publish = datetime.now()
@@ -45,12 +41,12 @@ def frame_update():
         if not ret:
             check = False
             while not check:
-                camera = cv2.VideoCapture(rtsp_link)
+                camera = cv2.VideoCapture(input_sounrce)
                 ret, frame = camera.read()
                 if ret:
                     check = True
                 else:
-                    time.sleep(0.2)
+                    time.sleep(0.5)
         outputFrame = frame.copy()
         # time.sleep(frame_update_sleep_delay)
 
@@ -93,7 +89,7 @@ def face_recogintion():
             dt_now = datetime.now()
             diff_time = dt_now-last_publish
             faces_json = ""
-            if diff_time.seconds > 1:
+            if diff_time.seconds > publish_min_dalay:
                 for key in summ_face_dict.keys():
                     summ_face_dict[key] /= Face_Occuracy_Count
                     if summ_face_dict[key] > max_prob:
@@ -106,7 +102,7 @@ def face_recogintion():
                     dir, name = get_str_date_fname(dt_now)
                     if not os.path.exists(dir):
                         os.mkdir(dir)
-                    name = dir+"/"+name+"_"+max_label+".jpg"
+                    name = dir+"/"+name+"_"+max_label+"_"+str(max_prob)+".jpg"
                     print("Creating Images........." + name)
                     cv2.rectangle(_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
                     cv2.rectangle(_image, (x, y-40), (x+w, y), (0, 255, 0), -2)
@@ -158,13 +154,14 @@ def mqtt_publish(topic, message):
 if __name__ == '__main__':
     with open('config.json') as json_file:
         Config = json.load(json_file)
-    rtsp_link = Config['rtsp_link']
-    camera = cv2.VideoCapture(rtsp_link)
+    input_sounrce = Config['input_sounrce']
+    camera = cv2.VideoCapture(input_sounrce)
     camera.set(3, Config['camera_w'])
     camera.set(4, Config['camera_h'])
     MQTT_BROKER = Config['mqtt_broker']
     DEBUG = Config['debug']
     frame_recognition_rate = Config['frame_recognition_rate']
+    publish_min_dalay = Config['publish_min_dalay']
     mqttclient = connect_mqtt("", "", MQTT_BROKER, port, client_id)
     frame_update_thread = threading.Thread(target=frame_update)
     frame_update_thread.start()
@@ -172,7 +169,7 @@ if __name__ == '__main__':
     face_recognition_thread.start()
     while True:
         if outputFrame is None:
-            time.sleep(0.1)
+            time.sleep(0.2)
             continue
         if Config['show_camera']:
             image = outputFrame.copy()

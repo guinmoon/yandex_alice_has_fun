@@ -32,6 +32,34 @@ sudo apt-get install git python3-dev
 git clone https://github.com/guinmoon/yandex_alice_has_fun
 cd yandex_alice_has_fun 
 ```
+
+# Настройка
+
+Настройки alice_has_fun.py хранятся в файле config.json:
+```
+{
+    "debug": false,
+    "show_camera": false,
+    "input_sounrce": 0,
+    "frame_recognition_rate": 4,
+    "publish_min_dalay": 1,
+    "camera_w": 1080,
+    "camera_h": 720,
+    "mqtt_broker": "127.0.0.1",
+    "save_on_detect": true
+}
+```
+| Параметр               |                                                              Назначение                                                              |
+| ---------------------- | :----------------------------------------------------------------------------------------------------------------------------------: |
+| debug                  |                                         Елси True то рзультаты не публикуются в MQTT брокер                                          |
+| show_camera            |                                  Елси True то с помощью cv2.imshow отображается видео из источника                                   |
+| input_sounrce          | Число (0 это первая веб камера), адрес потока ("rtsp://192.168.1.86:8554/unicast") или расположение видео файла ("raw/IMG_2404.MOV") |
+| frame_recognition_rate |                                                Частота распознавания кадров в секунду                                                |
+| publish_min_dalay      |                            Задержка перед публикацией, публикуются средние значения из распознаных кадров                            |
+| camera_w               |                                  Ширина видео для устройств поддерживающих задание разрешения видео                                  |
+| camera_h               |                                  Высота видео для устройств поддерживающих задание разрешения видео                                  |
+| mqtt_broker            |                                                          Адрес MQTT брокера                                                          |
+| save_on_detect         |                             Помимо публикации в брокер также будет сохранен кадр в директорию on_detect                              |
 # Запуск
 
 ```python3 alice_has_fun.py```
