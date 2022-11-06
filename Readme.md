@@ -34,6 +34,7 @@ cd yandex_alice_has_fun
 ```
 ```keras_model.h5``` и ```labels.txt``` меняем на свои
 
+
 # Запуск
 В файле .env меняем путь на расположение yandex_alice_has_fun
 ```
@@ -44,6 +45,11 @@ docker-compose up
 docker-compose up -d
 python3 alice_has_fun.py
 ```
+При первом запуске в Node-Red необходимо установить дополнительные модули ```node-red-contrib-postgresql, node-red-contrib-yandex-station-management, node-red-dashboard```. Сделать это лучше всего через Настройки -> Управление палитрой. Должно получиться так:
+
+![modules](/images/red_modules.png)
+
+После этого необходимо ипортировать файл ```data/alice_has_fun_flows.json``` в Node-Red и настроить соединение с колонкой и БД
 # Настройка
 Настройки alice_has_fun.py хранятся в файле config.json:
 ```

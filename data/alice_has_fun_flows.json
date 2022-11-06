@@ -1,0 +1,1597 @@
+[
+    {
+        "id": "9f1500a477fa23e7",
+        "type": "tab",
+        "label": "alice_has_fun",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d94d7e3f91c332d4",
+        "type": "tab",
+        "label": "UI",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "309129bd122e7987",
+        "type": "subflow",
+        "name": "Say by case",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "7dc371d6863d4020"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 600,
+                "y": 220,
+                "wires": [
+                    {
+                        "id": "5c899296ce929f2e",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "a4bccc8d.f9f1a",
+        "type": "mqtt-broker",
+        "name": "mosquitto docker",
+        "broker": "mosquitto_alice",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1b4473ab5d1d4ea9",
+        "type": "postgreSQLConfig",
+        "name": "",
+        "host": "postgres_alice",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "alice",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "guinmoon",
+        "userFieldType": "str",
+        "password": "",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "fb1524656ce0f66b",
+        "type": "yandex-login",
+        "name": "",
+        "debugFlag": true
+    },
+    {
+        "id": "0b8392d70c56b0e2",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-dark",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#3178b9",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#097479",
+                    "value": "#3178b9",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#3178b9",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#619ed5",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#3178b9",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "2abe11b5b7406b89",
+        "type": "ui_tab",
+        "name": "Player",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "181e5f680de47d34",
+        "type": "ui_group",
+        "name": "Player",
+        "tab": "2abe11b5b7406b89",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "313a8aef1fc96e57",
+        "type": "ui_tab",
+        "name": "Say",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "b95a8f843d05cc0f",
+        "type": "ui_group",
+        "name": "Alice Say",
+        "tab": "313a8aef1fc96e57",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a296c875ed672f92",
+        "type": "function",
+        "z": "309129bd122e7987",
+        "name": "Say Random",
+        "func": "function getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}\nvar phrase_id = getRandomInt(msg.payload.length);\nvar ret_msg={};\nvar face_name = global.get(\"last_face_alias\");\nif (msg.payload[phrase_id]!=undefined)\n    ret_msg.payload = face_name + \". \" + msg.payload[phrase_id].phrase;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 160,
+        "wires": [
+            [
+                "3a357235ce2bdbc6"
+            ]
+        ]
+    },
+    {
+        "id": "d74b180614f6762d",
+        "type": "delay",
+        "z": "309129bd122e7987",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "54f55d99e64f9146"
+            ]
+        ]
+    },
+    {
+        "id": "b651ec1f2bc04600",
+        "type": "switch",
+        "z": "309129bd122e7987",
+        "name": "IDLE?",
+        "property": "payload.aliceState",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "IDLE",
+                "vt": "str"
+            },
+            {
+                "t": "neq",
+                "v": "IDLE",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 320,
+        "wires": [
+            [
+                "5c899296ce929f2e"
+            ],
+            [
+                "d74b180614f6762d"
+            ]
+        ]
+    },
+    {
+        "id": "3a357235ce2bdbc6",
+        "type": "function",
+        "z": "309129bd122e7987",
+        "name": "push_phrase",
+        "func": "// name = context.get(\"name\"); \n// let phrase_query = global.get(\"phrase_to_say_query\");\n// if (phrase_query==undefined){\n//     phrase_query = []\n// }\n// phrase_query.push(msg.payload)\n// global.set(\"phrase_to_say_query\",phrase_query);\nflow.set(\"$parent.phrase_to_say\", msg.payload);\nmsg.payload = flow.get(\"$parent.phrase_to_say\");\n// msg.payload = phrase_query; \nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 220,
+        "wires": [
+            [
+                "964a8f427c234294",
+                "ba6536ca6591de65"
+            ]
+        ]
+    },
+    {
+        "id": "5c899296ce929f2e",
+        "type": "function",
+        "z": "309129bd122e7987",
+        "name": "pop_phrase",
+        "func": "var ret_msg ={}\nret_msg.payload = flow.get(\"$parent.phrase_to_say\"); \n// let phrase_query = global.get(\"phrase_to_say_query\");\n// node.log(phrase_query);\n// let phrase_to_say =\"\";\n// if (phrase_query == undefined) {\n//     phrase_query = []\n// }\n// else{\n//     phrase_to_say=phrase_query.shift(msg.payload)\n//     global.set(\"phrase_to_say_query\", phrase_query);\n// }\n// ret_msg.payload = phrase_to_say;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 220,
+        "wires": [
+            [
+                "6dbe9e9049800c14"
+            ]
+        ]
+    },
+    {
+        "id": "964a8f427c234294",
+        "type": "delay",
+        "z": "309129bd122e7987",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 250,
+        "y": 260,
+        "wires": [
+            [
+                "54f55d99e64f9146"
+            ]
+        ]
+    },
+    {
+        "id": "ba6536ca6591de65",
+        "type": "debug",
+        "z": "309129bd122e7987",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "7dc371d6863d4020",
+        "type": "postgresql",
+        "z": "309129bd122e7987",
+        "name": "select phrases by case",
+        "query": "select phrase from phrases where case_id=$1; ",
+        "postgreSQLConfig": "1b4473ab5d1d4ea9",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "a296c875ed672f92"
+            ]
+        ]
+    },
+    {
+        "id": "54f55d99e64f9146",
+        "type": "alice-local-get",
+        "z": "309129bd122e7987",
+        "name": "get",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": true,
+        "output": "status",
+        "homekitFormat": "speaker",
+        "x": 230,
+        "y": 320,
+        "wires": [
+            [
+                "b651ec1f2bc04600"
+            ]
+        ]
+    },
+    {
+        "id": "6dbe9e9049800c14",
+        "type": "alice-local-out",
+        "z": "309129bd122e7987",
+        "name": "STATION VOice",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": true,
+        "input": "tts",
+        "payload": "payload",
+        "payloadType": "msg",
+        "volume": "50",
+        "volumeFlag": false,
+        "stopListening": false,
+        "pauseMusic": false,
+        "noTrack": "",
+        "whisper": false,
+        "ttsVoice": "",
+        "ttsEffect": "",
+        "x": 480,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fca96afe.22cf28",
+        "type": "debug",
+        "z": "9f1500a477fa23e7",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "1fcf7bf2799d49d3",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "ParceFaces",
+        "func": "var faces=JSON.parse(msg.payload);\nvar max_p=-1\nvar max_face = ''\nObject.keys(faces).forEach(function (key) {\n    // console.log('Key : ' + key + ', Value : ' + faces[key])\n    if (faces[key]>max_p){\n        max_p = faces[key];\n        max_face = key;\n    }\n})\nvar ret_msg = {};\nif (max_p < 70)\n    max_face = \"unknown\";\nglobal.set(\"last_face\", max_face);\nif (max_face == 'Господин') {\n    global.set(\"last_face_alias\", '');\n} else {\n    global.set(\"last_face_alias\", max_face);\n}\nret_msg.payload = max_face\nret_msg.params=[max_face]\n\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 140,
+        "wires": [
+            [
+                "b9a575d9974a311b"
+            ]
+        ]
+    },
+    {
+        "id": "e050e3fb664c7281",
+        "type": "switch",
+        "z": "9f1500a477fa23e7",
+        "name": "LastSeen Switch",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "15",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "16",
+                "vt": "num",
+                "v2": "50",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "51",
+                "vt": "num",
+                "v2": "100000",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [],
+            [
+                "4b73e37f1fbcf2f4"
+            ],
+            [
+                "475336da1970d327"
+            ]
+        ]
+    },
+    {
+        "id": "475336da1970d327",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "current hour",
+        "func": "let ret_msg = {};\nlet current = new Date().getHours();\nret_msg.payload = current;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 400,
+        "wires": [
+            [
+                "0bf8ca1e4e6ed6bb"
+            ]
+        ]
+    },
+    {
+        "id": "0bf8ca1e4e6ed6bb",
+        "type": "switch",
+        "z": "9f1500a477fa23e7",
+        "name": "Hour",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "6",
+                "vt": "num",
+                "v2": "11",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "11",
+                "vt": "num",
+                "v2": "23",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "5",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 470,
+        "y": 420,
+        "wires": [
+            [
+                "09ce781a067da5b8"
+            ],
+            [
+                "2049699c592464df"
+            ],
+            [
+                "6bd1d1a83d3d5272"
+            ]
+        ]
+    },
+    {
+        "id": "4b73e37f1fbcf2f4",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "current hour",
+        "func": "let ret_msg={};\nlet current = new Date().getHours();\nret_msg.payload = current;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 360,
+        "wires": [
+            [
+                "10662e28f0be55ca"
+            ]
+        ]
+    },
+    {
+        "id": "10662e28f0be55ca",
+        "type": "switch",
+        "z": "9f1500a477fa23e7",
+        "name": "Hour",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "btwn",
+                "v": "6",
+                "vt": "num",
+                "v2": "11",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "11",
+                "vt": "num",
+                "v2": "23",
+                "v2t": "num"
+            },
+            {
+                "t": "btwn",
+                "v": "0",
+                "vt": "num",
+                "v2": "5",
+                "v2t": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 470,
+        "y": 340,
+        "wires": [
+            [
+                "ddb5be0b4b3bd2de"
+            ],
+            [
+                "ddb5be0b4b3bd2de"
+            ],
+            [
+                "6bd1d1a83d3d5272"
+            ]
+        ]
+    },
+    {
+        "id": "79f0c88634c44c47",
+        "type": "mqtt in",
+        "z": "9f1500a477fa23e7",
+        "name": "FaceOccuracy",
+        "topic": "for_alice/peoples",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "a4bccc8d.f9f1a",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "1fcf7bf2799d49d3",
+                "fca96afe.22cf28"
+            ]
+        ]
+    },
+    {
+        "id": "4356d8ccc6ae06a0",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "parse_last_seen",
+        "func": "\nvar ret_msg = {}\nif (msg.payload.length==0){\n    let now = new Date()\n    ret_msg.payload = now.setMinutes(now.getMinutes() - 130);\n}else{\n    ret_msg.payload = new Date(msg.payload[0].last_seen)\n}\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 140,
+        "wires": [
+            [
+                "042a7a6fabbcefce"
+            ]
+        ]
+    },
+    {
+        "id": "042a7a6fabbcefce",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "time elapsed",
+        "func": "let current = new Date().valueOf();\nlet last_seen = new Date(msg.payload).valueOf();\nlet diff = current - last_seen;\n// let mins = Math.floor((diff / 1000) / 60);\n// let mins = Math.round((diff % 3600000) / 60000);\nlet mins = Math.round(diff / 60000);\nlet ret_msg = {}\nret_msg.payload = mins;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "e050e3fb664c7281",
+                "fca96afe.22cf28"
+            ]
+        ]
+    },
+    {
+        "id": "b720c3cae26f2575",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "face_name",
+        "func": "var ret_msg={};\nvar face_name = global.get(\"last_face\");\nret_msg.params = [face_name]\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 200,
+        "wires": [
+            [
+                "e7e9f5131191218f"
+            ]
+        ]
+    },
+    {
+        "id": "ddb5be0b4b3bd2de",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "case_16-51",
+        "func": "var ret_msg={};\nret_msg.params = [1];\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 320,
+        "wires": [
+            [
+                "afaa81e381e57c0d"
+            ]
+        ]
+    },
+    {
+        "id": "6bd1d1a83d3d5272",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "case_night",
+        "func": "var ret_msg={};\nret_msg.params = [5];\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 440,
+        "wires": [
+            [
+                "afaa81e381e57c0d"
+            ]
+        ]
+    },
+    {
+        "id": "09ce781a067da5b8",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "case_mornign",
+        "func": "var ret_msg={};\nret_msg.params = [4];\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 400,
+        "wires": [
+            [
+                "afaa81e381e57c0d"
+            ]
+        ]
+    },
+    {
+        "id": "2049699c592464df",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "case_51...",
+        "func": "var ret_msg={};\nret_msg.params = [2];\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 360,
+        "wires": [
+            [
+                "afaa81e381e57c0d"
+            ]
+        ]
+    },
+    {
+        "id": "afaa81e381e57c0d",
+        "type": "subflow:309129bd122e7987",
+        "z": "9f1500a477fa23e7",
+        "name": "",
+        "x": 890,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee732dc1bbc6e845",
+        "type": "inject",
+        "z": "9f1500a477fa23e7",
+        "name": "alice_fun",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "afe6b6a3ff878de9"
+            ]
+        ]
+    },
+    {
+        "id": "edbfaccd59fe7d11",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "case_666",
+        "func": "var ret_msg={};\nret_msg.params = [msg.payload];\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 520,
+        "wires": [
+            [
+                "ac3d7ca90a2568ec"
+            ]
+        ]
+    },
+    {
+        "id": "94f670b9ce702069",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "rand3",
+        "func": "function getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}\nvar run = getRandomInt(3);\nlet ret_msg={}\nret_msg.payload=-1\nif (run==1)\n    ret_msg.payload=666\nlet current = msg.payload;\nif (current>=22 || current<9)\n    ret_msg.payload = -2\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 520,
+        "wires": [
+            [
+                "edbfaccd59fe7d11"
+            ]
+        ]
+    },
+    {
+        "id": "17e90c53e9318a54",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "Say Random",
+        "func": "function getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}\nvar phrase_id = getRandomInt(msg.payload.length);\nvar ret_msg={};\nif (msg.payload[phrase_id]!=undefined)\n    ret_msg.payload = msg.payload[phrase_id].phrase;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 600,
+        "wires": [
+            [
+                "d0c4c1b7acd18a15"
+            ]
+        ]
+    },
+    {
+        "id": "afe6b6a3ff878de9",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "current hour",
+        "func": "let ret_msg = {};\nlet current = new Date().getHours();\nret_msg.payload = current;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [
+                "94f670b9ce702069"
+            ]
+        ]
+    },
+    {
+        "id": "b9a575d9974a311b",
+        "type": "switch",
+        "z": "9f1500a477fa23e7",
+        "name": "unknown",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "unknown",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "unknown",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 180,
+        "y": 200,
+        "wires": [
+            [
+                "7aa5d303aa2168ee"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "a9ad3a79aa64946a",
+        "type": "inject",
+        "z": "9f1500a477fa23e7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 840,
+        "y": 500,
+        "wires": [
+            [
+                "6bd1d1a83d3d5272"
+            ]
+        ]
+    },
+    {
+        "id": "e7e9f5131191218f",
+        "type": "postgresql",
+        "z": "9f1500a477fa23e7",
+        "name": "update last_seen",
+        "query": "insert into last_seen (user_name) \nvalues ($1) \nON CONFLICT (user_name) DO UPDATE \nSET user_name = excluded.user_name,\nlast_seen = CURRENT_TIMESTAMP(3); ",
+        "postgreSQLConfig": "1b4473ab5d1d4ea9",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 410,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7aa5d303aa2168ee",
+        "type": "postgresql",
+        "z": "9f1500a477fa23e7",
+        "name": "select last_seen",
+        "query": "select last_seen from last_seen where user_name=$1; ",
+        "postgreSQLConfig": "1b4473ab5d1d4ea9",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 400,
+        "y": 140,
+        "wires": [
+            [
+                "4356d8ccc6ae06a0",
+                "b720c3cae26f2575"
+            ]
+        ]
+    },
+    {
+        "id": "ac3d7ca90a2568ec",
+        "type": "postgresql",
+        "z": "9f1500a477fa23e7",
+        "name": "select phrases by case",
+        "query": "select phrase from phrases where case_id=$1; ",
+        "postgreSQLConfig": "1b4473ab5d1d4ea9",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 180,
+        "y": 600,
+        "wires": [
+            [
+                "17e90c53e9318a54"
+            ]
+        ]
+    },
+    {
+        "id": "d0c4c1b7acd18a15",
+        "type": "alice-local-out",
+        "z": "9f1500a477fa23e7",
+        "name": "STATION VOice",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": true,
+        "input": "tts",
+        "payload": "payload",
+        "payloadType": "msg",
+        "volume": "50",
+        "volumeFlag": false,
+        "stopListening": true,
+        "pauseMusic": false,
+        "noTrack": "",
+        "whisper": false,
+        "ttsVoice": "",
+        "ttsEffect": "",
+        "x": 600,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "065205cb6e7161ac",
+        "type": "alice-local-station",
+        "z": "9f1500a477fa23e7",
+        "name": "My Yandex Max",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": false,
+        "connectionFlag": true,
+        "sheduler": [
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 1
+            },
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 2
+            },
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 3
+            },
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 4
+            },
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 5
+            },
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 6
+            },
+            {
+                "active": false,
+                "from": "0",
+                "to": "1440",
+                "phrase": "",
+                "dayNumber": 0
+            }
+        ],
+        "network": {
+            "mode": "manual",
+            "address": "192.168.1.60",
+            "port": "1961"
+        },
+        "fixedAddress": "192.168.1.60",
+        "fixedPort": "1961",
+        "phrase": "",
+        "x": 840,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a72926ffcf9c4f8e",
+        "type": "function",
+        "z": "d94d7e3f91c332d4",
+        "name": "say",
+        "func": "var ret_msg={};\nif(msg.payload.say!=undefined)\n    ret_msg.payload = msg.payload.say;\nelse\n    ret_msg.payload = \"\";\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 140,
+        "wires": [
+            [
+                "1184c769a6425c0a"
+            ]
+        ]
+    },
+    {
+        "id": "1184c769a6425c0a",
+        "type": "alice-local-out",
+        "z": "d94d7e3f91c332d4",
+        "name": "STATION VOice",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": true,
+        "input": "tts",
+        "payload": "payload",
+        "payloadType": "msg",
+        "volume": "50",
+        "volumeFlag": false,
+        "stopListening": true,
+        "pauseMusic": false,
+        "noTrack": "",
+        "whisper": false,
+        "ttsVoice": "",
+        "ttsEffect": "",
+        "x": 420,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "64c8cd244f4da19a",
+        "type": "function",
+        "z": "d94d7e3f91c332d4",
+        "name": "prepare_phrase",
+        "func": "var ret_msg={};\nret_msg.params = [flow.get(\"case_id\"), msg.payload.phrase]\nret_msg.payload = [flow.get(\"case_id\"), msg.payload.phrase]\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "f6555147336ffc93"
+            ]
+        ]
+    },
+    {
+        "id": "f6555147336ffc93",
+        "type": "postgresql",
+        "z": "d94d7e3f91c332d4",
+        "name": "insert phrase",
+        "query": "insert into phrases (case_id,phrase) \nvalues ($1,$2);",
+        "postgreSQLConfig": "1b4473ab5d1d4ea9",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "82e026fdea6976d4"
+            ]
+        ]
+    },
+    {
+        "id": "82e026fdea6976d4",
+        "type": "function",
+        "z": "d94d7e3f91c332d4",
+        "name": "check_error",
+        "func": "var ret_msg={}\nif (msg.payload!=undefined&&msg.payload.length==0)\n    ret_msg.payload=\"Добавлено\";\nelse\n    ret_msg.payload = msg;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b154167cabd440c1",
+        "type": "postgresql",
+        "z": "d94d7e3f91c332d4",
+        "name": "select cases",
+        "query": "select * from cases; ",
+        "postgreSQLConfig": "1b4473ab5d1d4ea9",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "6d95fa62486b7a71"
+            ]
+        ]
+    },
+    {
+        "id": "7ac24a83c4415c3f",
+        "type": "inject",
+        "z": "d94d7e3f91c332d4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 60,
+        "wires": [
+            [
+                "b154167cabd440c1"
+            ]
+        ]
+    },
+    {
+        "id": "6d95fa62486b7a71",
+        "type": "function",
+        "z": "d94d7e3f91c332d4",
+        "name": "parse cases",
+        "func": "var ret_msg={}\nret_msg.options = []\nfor (var i=0;i<msg.payload.length;i++){\n    var value = msg.payload[i].case;\n    var id = msg.payload[i].id;\n    var option = {};\n    option[value] = id;\n    ret_msg.options.push(option)\n}\nret_msg.payload = 1;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "dbbab863f2bf1db8"
+            ]
+        ]
+    },
+    {
+        "id": "b2dc75505fb2159b",
+        "type": "alice-local-in",
+        "z": "d94d7e3f91c332d4",
+        "name": "Full Status",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "uniqueFlag": false,
+        "debugFlag": false,
+        "output": "status",
+        "homekitFormat": "speaker",
+        "x": 620,
+        "y": 60,
+        "wires": [
+            [
+                "db7d25d3.9110a8"
+            ]
+        ]
+    },
+    {
+        "id": "8261059a551897cd",
+        "type": "alice-local-out",
+        "z": "d94d7e3f91c332d4",
+        "name": "Raw Command",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": false,
+        "input": "raw",
+        "payload": "payload",
+        "payloadType": "msg",
+        "volume": "50",
+        "volumeFlag": false,
+        "stopListening": true,
+        "pauseMusic": false,
+        "noTrack": "",
+        "whisper": false,
+        "ttsVoice": "",
+        "ttsEffect": "",
+        "x": 620,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "343b5e375f7397be",
+        "type": "alice-local-out",
+        "z": "d94d7e3f91c332d4",
+        "name": "Run Command",
+        "token": "fb1524656ce0f66b",
+        "station_id": "XK00000000000000515800003be983c2",
+        "debugFlag": false,
+        "input": "voice",
+        "payload": "payload",
+        "payloadType": "msg",
+        "volume": "50",
+        "volumeFlag": false,
+        "stopListening": true,
+        "pauseMusic": false,
+        "noTrack": "",
+        "whisper": false,
+        "ttsVoice": "",
+        "ttsEffect": "",
+        "x": 640,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f54ad095fefddeab",
+        "type": "function",
+        "z": "d94d7e3f91c332d4",
+        "name": "run",
+        "func": "var ret_msg={};\nret_msg.payload = msg.payload.run;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 220,
+        "wires": [
+            [
+                "343b5e375f7397be"
+            ]
+        ]
+    },
+    {
+        "id": "a7c0e2c2f6f7b5d2",
+        "type": "function",
+        "z": "d94d7e3f91c332d4",
+        "name": "set_case_id",
+        "func": "flow.set(\"case_id\",msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 150,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dbbab863f2bf1db8",
+        "type": "ui_dropdown",
+        "z": "d94d7e3f91c332d4",
+        "name": "Case ID",
+        "label": "",
+        "tooltip": "",
+        "place": "",
+        "group": "b95a8f843d05cc0f",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [],
+        "payload": "",
+        "topic": "case_id ",
+        "topicType": "str",
+        "className": "",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "a7c0e2c2f6f7b5d2"
+            ]
+        ]
+    },
+    {
+        "id": "14754119354ead4f",
+        "type": "ui_form",
+        "z": "d94d7e3f91c332d4",
+        "name": "",
+        "label": "",
+        "group": "b95a8f843d05cc0f",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "",
+                "value": "say",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "say": ""
+        },
+        "payload": "",
+        "submit": "Скажи",
+        "cancel": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "a72926ffcf9c4f8e"
+            ]
+        ]
+    },
+    {
+        "id": "4d2c535da7ffe4ad",
+        "type": "ui_form",
+        "z": "d94d7e3f91c332d4",
+        "name": "",
+        "label": "",
+        "group": "181e5f680de47d34",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Выполни",
+                "value": "run",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "run": ""
+        },
+        "payload": "",
+        "submit": "Выполнить",
+        "cancel": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 630,
+        "y": 180,
+        "wires": [
+            [
+                "f54ad095fefddeab"
+            ]
+        ]
+    },
+    {
+        "id": "c06bf796fb47c1f4",
+        "type": "ui_form",
+        "z": "d94d7e3f91c332d4",
+        "name": "Phrase Form",
+        "label": "",
+        "group": "b95a8f843d05cc0f",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "фраза",
+                "value": "phrase",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "phrase": ""
+        },
+        "payload": "",
+        "submit": "Добавить",
+        "cancel": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "className": "",
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "64c8cd244f4da19a"
+            ]
+        ]
+    },
+    {
+        "id": "db7d25d3.9110a8",
+        "type": "ui_template",
+        "z": "d94d7e3f91c332d4",
+        "group": "181e5f680de47d34",
+        "name": "Player",
+        "order": 1,
+        "width": "8",
+        "height": "8",
+        "format": "<style>\n  .yandex-player {\n    height: 100%;\n    position: relative;\n    min-height: 128px;\n    z-index: 1;\n    background: url(\"//avatars.mds.yandex.net/get-music-misc/29541/img.5e6a1c5b38be6e3bae26558a/600x600\");\n    background-repeat: no-repeat;\n    background-position: center;\n    background-size: cover;\n  }\n\n  .yandex-player .gradient {\n    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75));\n    position: absolute;\n    bottom: 0;\n    left: 0;\n  }\n\n  .yandex-player .controls {\n    margin: 24px 32px;\n    color: rgba(255, 255, 255, 0.75);\n    font-family: Roboto, Noto, sans-serif;\n    -moz-osx-font-smoothing: grayscale;\n    -webkit-font-smoothing: antialiased;\n    font-weight: lighter;\n  }\n\n  .yandex-player .title {\n    font-size: larger;\n  }\n\n  .yandex-player .subtitle {\n    font-size: medium;\n  }\n\n  .yandex-player .ui {\n    padding: 16px 0 24px 0;\n  }\n\n  .yandex-player .ui i {\n    cursor: pointer;\n  }\n\n  .yandex-player .ui i:hover {\n    color: rgba(255, 255, 255, 1);\n  }\n\n  .yandex-player .ui-btn {\n    float: left;\n    display: flex;\n    justify-content: space-between;\n    width: 20%;\n  }\n\n  .yandex-player .ui-volume {\n    float: right;\n    display: flex;\n    justify-content: space-between;\n    width: 80%;\n    vertical-align: middle;\n  }\n\n  .yandex-player .slider {\n    position: relative;\n    cursor: pointer;\n    width: 100%;\n    margin: 0 16px;\n    opacity: 1;\n    display: inline-block;\n  }\n\n  .yandex-player .slider_base {\n    width: 100%;\n    height: 2px;\n    background-color: rgba(255, 255, 255, 0.75);\n    border-radius: 2px;\n    position: absolute;\n    top: 8px;\n  }\n\n  .yandex-player .slider_progress {\n    height: 4px;\n    background-color: rgba(255, 255, 255, 1);\n    border-radius: 2px;\n    position: absolute;\n    top: 7px;\n  }\n\n  .yandex-player .bar {\n    position: absolute;\n    cursor: pointer;\n    width: 100%;\n    opacity: 1;\n    bottom: 0;\n    height: 6px;\n    background-color: rgba(255, 255, 255, 0.75);\n  }\n\n  .yandex-player .bar_progress {\n    width: 0;\n    height: 100%;\n    background-color: #fc0;\n  }\n\n  .yandex-player .red {\n    color: red;\n  }\n</style>\n<div class=\"yandex-player\">\n  <div class=\"gradient\" style=\"min-height: 128px; width: 100%;\">\n    <div class=\"controls\">\n      <div class=\"title\"></div>\n      <div class=\"subtitle\"></div>\n      <div class=\"ui\">\n        <div class=\"ui-btn\">\n          <i class=\"fa fa-step-backward fa-lg\" aria-hidden=\"true\"></i>\n          <i class=\"btn-play-pause fa fa-play fa-lg\" aria-hidden=\"true\"></i>\n          <i class=\"fa fa-step-forward fa-lg\" aria-hidden=\"true\"></i>\n        </div>\n\n        <div class=\"ui-volume\">\n          <div class=\"slider\">\n            <div class=\"slider_base\"></div>\n            <div class=\"slider_progress\"></div>\n          </div>\n          <div style=\"width: 10%;\">\n            <i class=\"btn-volume fa fa-volume-up fa-lg\" aria-hidden=\"true\"></i>\n          </div>\n          <div style=\"width: 10%; text-align: right; margin-left: 16px;\">\n            <i class=\"fa fa-heart fa-lg\" aria-hidden=\"true\"></i>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"bar\">\n      <div class=\"bar_progress\"></div>\n    </div>\n  </div>\n</div>\n<script>\n  /*! js-cookie v3.0.0-rc.1 | MIT */\n  !function (e, t) { \"object\" == typeof exports && \"undefined\" != typeof module ? module.exports = t() : \"function\" == typeof define && define.amd ? define(t) : (e = e || self, function () { var n = e.Cookies, r = e.Cookies = t(); r.noConflict = function () { return e.Cookies = n, r } }()) }(this, function () { \"use strict\"; function e(e) { for (var t = 1; t < arguments.length; t++) { var n = arguments[t]; for (var r in n) e[r] = n[r] } return e } var t = { read: function (e) { return e.replace(/(%[\\dA-F]{2})+/gi, decodeURIComponent) }, write: function (e) { return encodeURIComponent(e).replace(/%(2[346BF]|3[AC-F]|40|5[BDE]|60|7[BCD])/g, decodeURIComponent) } }; return function n(r, o) { function i(t, n, i) { if (\"undefined\" != typeof document) { \"number\" == typeof (i = e({}, o, i)).expires && (i.expires = new Date(Date.now() + 864e5 * i.expires)), i.expires && (i.expires = i.expires.toUTCString()), t = encodeURIComponent(t).replace(/%(2[346B]|5E|60|7C)/g, decodeURIComponent).replace(/[()]/g, escape), n = r.write(n, t); var c = \"\"; for (var u in i) i[u] && (c += \"; \" + u, !0 !== i[u] && (c += \"=\" + i[u].split(\";\")[0])); return document.cookie = t + \"=\" + n + c } } return Object.create({ set: i, get: function (e) { if (\"undefined\" != typeof document && (!arguments.length || e)) { for (var n = document.cookie ? document.cookie.split(\"; \") : [], o = {}, i = 0; i < n.length; i++) { var c = n[i].split(\"=\"), u = c.slice(1).join(\"=\"); '\"' === u[0] && (u = u.slice(1, -1)); try { var f = t.read(c[0]); if (o[f] = r.read(u, f), e === f) break } catch (e) { } } return e ? o[e] : o } }, remove: function (t, n) { i(t, \"\", e({}, n, { expires: -1 })) }, withAttributes: function (t) { return n(this.converter, e({}, this.attributes, t)) }, withConverter: function (t) { return n(e({}, this.converter, t), this.attributes) } }, { attributes: { value: Object.freeze(o) }, converter: { value: Object.freeze(r) } }) }(t, { path: \"/\" }) });\n</script>\n<script>\n  (function (scope) {\n    // function\n    function setVolume(volume, send) {\n      // console.log('volume:' + volume);\n\n      Cookies.set('yandex-volume', volume, { expires: 7 });\n      $('.slider_progress').animate({ width: volume + '%' });\n\n      if (volume <= 4.5) {\n        volume = 0;\n      } else if (volume > 4.5 && volume < 10) {\n        volume = 10;\n      } else if (volume >= 95.5) {\n        volume = 100;\n      }\n\n      let toggle = volume > 0 ? true : false;\n      $('.btn-volume').toggleClass('fa-volume-up', toggle).toggleClass('fa-volume-off', !toggle);\n\n      if (send) {\n        scope.send({ 'payload': { 'command': 'setVolume', 'volume': volume / 100 } });\n      }\n    }\n\n    function setProgress(playerState) {\n      let progress = (playerState.progress / playerState.duration) * 100;\n      //$('.bar_progress').animate({ width: progress + '%' }, 'fast');\n      $('.bar_progress').width(progress + '%');\n    }\n\n    function setLike(id) {\n      let like = JSON.parse(Cookies.get('yandex-like') || '{}');\n      like[id] = id;\n      Cookies.set('yandex-like', JSON.stringify(like), { expires: 3 });\n      $('.fa-heart').addClass('red');\n\n      scope.send({ payload: { 'command': 'sendText', 'text': 'поставь лайк' } });\n    }\n\n    function setDislike(id) {\n      let like = JSON.parse(Cookies.get('yandex-like') || '{}');\n      if (like[id] !== undefined) {\n        delete like[id];\n      }\n      Cookies.set('yandex-like', JSON.stringify(like), { expires: 3 });\n      $('.fa-heart').removeClass('red');\n\n      scope.send({ payload: { 'command': 'sendText', 'text': 'поставь дизлайк' } });\n    }\n\n    // init volume\n    let volume = Cookies.get('yandex-volume') || 30;\n    setVolume(volume);\n\n    // init+update\n    scope.$watch('msg', function (msg) {\n      if (msg) {\n        if ('command' in msg.payload) {\n          if (msg.payload.command == 'setVolume') {\n            let volume = Math.round(msg.payload.volume * 100);\n            setVolume(volume);\n          }\n        }\n\n        if (msg.payload.playing === true || msg.payload.playing === false) {\n          $('.btn-play-pause').toggleClass('fa-pause', msg.payload.playing).toggleClass('fa-play', !msg.payload.playing);\n        }\n\n        if ('playerState' in msg.payload) {\n          //update title\n          $('.title').text(msg.payload.playerState.title);\n          $('.subtitle').text(msg.payload.playerState.subtitle);\n\n          //update img\n          let thumb = 'avatars.mds.yandex.net/get-music-misc/29541/img.5e6a1c5b38be6e3bae26558a/%%';\n          if (msg.payload.playerState.extra !== null && typeof msg.payload.playerState.extra.coverURI !== \"undefined\") {\n            thumb = msg.payload.playerState.extra.coverURI;\n          }\n          thumb = '//' + thumb.replace(/%%/g, \"600x600\");\n\n          if (thumb != $('.yandex-player').attr('data-image')) {\n            $('.yandex-player').css('background-image', 'url(' + thumb + ')').attr('data-image', thumb);\n          }\n\n          setProgress(msg.payload.playerState);\n\n          let id = msg.payload.playerState.id;\n          if (id != $('.fa-heart').attr('data-id')) {\n            $('.fa-heart').removeClass('red').attr('data-id', id);\n            let like = JSON.parse(Cookies.get('yandex-like') || '{}');\n            if (like[id]) {\n              $('.fa-heart').addClass('red');\n            }\n          }\n        }\n      }\n    });\n\n    // controls\n    $('.btn-play-pause').click(function () {\n      scope.send({ 'payload': { 'command': scope.msg.payload.playing ? 'stop' : 'play' } });\n    });\n\n    $('.fa-step-backward').click(function () {\n      scope.send({ 'payload': { 'command': 'prev' } });\n    });\n\n    $('.fa-step-forward').click(function () {\n      scope.send({ 'payload': { 'command': 'next' } });\n    });\n\n    // slider volume\n    $('.slider').on('click', function (event) {\n      let left = $('.slider').offset().left;\n      let width = $('.slider').outerWidth();\n\n      let volume = (event.clientX - left) / width * 100;\n\n      setVolume(volume, true);\n    });\n\n    // volume\n    $('.btn-volume').on('click', function () {\n      if ($(this).hasClass('fa-volume-up')) {\n        let volume = Cookies.get('yandex-volume') || 30;\n        Cookies.set('yandex-volume-save', volume, { expires: 7 });\n        setVolume(0, true);\n      } else if ($(this).hasClass('fa-volume-off')) {\n        let volume = Cookies.get('yandex-volume-save') || 30;\n        setVolume(volume, true);\n      }\n    });\n\n    // bar\n    $('.bar').on('click', function (event) {\n      let left = $('.bar').offset().left;\n      let width = $('.bar').outerWidth();\n\n      let percent = (event.clientX - left) / width * 100;\n      let position = Math.round(percent * (scope.msg.payload.playerState.duration / 100));\n\n      scope.send({ 'payload': { 'command': 'rewind', 'position': position } });\n      if ($('.btn-play-pause').hasClass('fa-play')) {\n        scope.send({ 'payload': { 'command': 'play' } });\n      }\n    });\n\n    //like\n    $('.fa-heart').on('click', function () {\n      let id = $(this).attr('data-id');\n      if (!$(this).hasClass('red')) {\n        setLike(id);\n      } else {\n        setDislike(id);\n      }\n    });\n\n  })(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": false,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 610,
+        "y": 100,
+        "wires": [
+            [
+                "8261059a551897cd"
+            ]
+        ]
+    },
+    {
+        "id": "c73309b285a7fa7c",
+        "type": "ui_template",
+        "z": "d94d7e3f91c332d4",
+        "group": "b95a8f843d05cc0f",
+        "name": "Alice_icon",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<div ng-bind-html=\"msg.payload\"></div>\n<div style=\"width:200px;\n            height:200px;\n            margin: auto;\n            margin-bottom: 20px;\n            background: url('data:image/png;base64,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');\n            \">\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 410,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    }
+]
