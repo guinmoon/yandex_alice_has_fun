@@ -32,9 +32,19 @@ sudo apt-get install git python3-dev
 git clone https://github.com/guinmoon/yandex_alice_has_fun
 cd yandex_alice_has_fun 
 ```
+```keras_model.h5``` и ```labels.txt``` меняем на свои
 
+# Запуск
+В файле .env меняем путь на расположение yandex_alice_has_fun
+```
+docker-compose up
+```
+Если Postgers, Mosquitto и Node-Red запустились без ошибок то
+```
+docker-compose up -d
+python3 alice_has_fun.py
+```
 # Настройка
-
 Настройки alice_has_fun.py хранятся в файле config.json:
 ```
 {
@@ -60,6 +70,46 @@ cd yandex_alice_has_fun
 | camera_h               |                                  Высота видео для устройств поддерживающих задание разрешения видео                                  |
 | mqtt_broker            |                                                          Адрес MQTT брокера                                                          |
 | save_on_detect         |                             Помимо публикации в брокер также будет сохранен кадр в директорию on_detect                              |
-# Запуск
 
-```python3 alice_has_fun.py```
+# Автозапуск
+Для корректного запуска docker-copmpose при старте системы лучше создать сервис, чтобы убедиться что необходимые службы запущены
+```
+sudo nano /etc/systemd/system/alice-docker-compose.service
+```
+```
+[Unit]
+Description=Docker Compose Application Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=<Путь к рабочей директории alice has fun>
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
+Restart=on-failure
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Install]
+WantedBy=multi-user.target
+```
+```
+sudo systemctl enable alice-docker-compose
+```
+Скрипт alice_has_fun.py можно запускать отдельно, например через crontab, скриптом вроде этого
+```
+#!/bin/bash
+cd /home/m_vs_m/soft/alice_live
+if screen -list | grep -q "alice_live"; then
+    /usr/bin/screen -S alice_live -X quit
+fi
+/usr/bin/screen -S alice_live -d -m python3 alice_has_fun.py
+```
+Отдельный запуск позволяет на время остановить распознавание, снизив нагрузку на железо, но продолжив дорабатывать систему.
+Для отсановки необходимо завершить screen сессию
+```
+if screen -list | grep -q "alice_live"; then
+    /usr/bin/screen -S alice_live -X quit
+fi
+```

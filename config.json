@@ -7,5 +7,6 @@
     "camera_w": 640,
     "camera_h": 480,
     "mqtt_broker": "192.168.1.45",
+    "mqtt_port": 11883,
     "save_on_detect": true
 }

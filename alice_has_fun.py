@@ -1,4 +1,5 @@
 from datetime import datetime
+from distutils.command.build_scripts import first_line_re
 import cv2
 import numpy as np
 from keras.models import load_model
@@ -15,7 +16,7 @@ Config = None
 mqttclient = None
 input_sounrce = None
 MQTT_BROKER = None
-port = 1883
+MQTT_PORT = 1883
 client_id = f'alice_fun-mqtt-{random.randint(0, 1000)}'
 DEBUG = True
 model = load_model('keras_model.h5')
@@ -144,7 +145,7 @@ def mqtt_publish(topic, message):
     else:
         print(f"Failed to send message to topic {topic}")
         print("Try reconnect...")
-        mqttclient = connect_mqtt("", "", MQTT_BROKER, port, client_id)
+        mqttclient = connect_mqtt("", "", MQTT_BROKER, MQTT_PORT, client_id)
         result = mqttclient.publish(topic, message)
         status = result[0]
         if status == 0:
@@ -160,9 +161,10 @@ if __name__ == '__main__':
     camera.set(4, Config['camera_h'])
     MQTT_BROKER = Config['mqtt_broker']
     DEBUG = Config['debug']
+    MQTT_PORT = Config['mqtt_port']
     frame_recognition_rate = Config['frame_recognition_rate']
     publish_min_dalay = Config['publish_min_dalay']
-    mqttclient = connect_mqtt("", "", MQTT_BROKER, port, client_id)
+    mqttclient = connect_mqtt("", "", MQTT_BROKER, MQTT_PORT, client_id)
     frame_update_thread = threading.Thread(target=frame_update)
     frame_update_thread.start()
     face_recognition_thread = threading.Thread(target=face_recogintion)
