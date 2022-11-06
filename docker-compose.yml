@@ -5,15 +5,15 @@ services:
     restart: always
     container_name: "postgres_alice"
     environment:
-      - POSTGRES_USER=guinmoon
-      - POSTGRES_PASSWORD=moysohn7
+      - POSTGRES_USER=alice
+      - POSTGRES_PASSWORD=alice_pass
       - POSTGRES_DB=alice
       - PGDATA=/tmp
     ports:
       - 5433:5432
     volumes:
-      - ${WD}/storage/db_init/:/docker-entrypoint-initdb.d/
-      - ${WD}/storage/pg_data/:/tmp
+      - ${STOR}/storage/db_init/:/docker-entrypoint-initdb.d/
+      - ${STOR}/storage/pg_data/:/tmp
 
   node-red:
     image: nodered/node-red:latest
@@ -22,7 +22,7 @@ services:
     ports:
       - 1888:1880
     volumes:
-      - ${WD}/storage/node-red-data:/data
+      - ${STOR}/storage/node-red-data:/data
 
   mosquitto_alice:
     image: eclipse-mosquitto:1.6.13
@@ -31,7 +31,7 @@ services:
     # volumes:
     #   - ${WD}/storage/mosquitto-data:/mosquitto
 
-volumes:
-  tmp:
-    external: false
-    name: tmp
+    # volumes:
+    #   tmp:
+    #     external: false
+    #     name: tmp
