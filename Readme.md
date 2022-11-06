@@ -66,6 +66,7 @@ python3 alice_has_fun.py
     "camera_w": 1080,
     "camera_h": 720,
     "mqtt_broker": "127.0.0.1",
+    "mqtt_port": 11883,
     "save_on_detect": true
 }
 ```
@@ -79,6 +80,7 @@ python3 alice_has_fun.py
 | camera_w               |                                  Ширина видео для устройств поддерживающих задание разрешения видео                                  |
 | camera_h               |                                  Высота видео для устройств поддерживающих задание разрешения видео                                  |
 | mqtt_broker            |                                                          Адрес MQTT брокера                                                          |
+| mqtt_port              |                                                          Порт MQTT брокера                                                           |
 | save_on_detect         |                             Помимо публикации в брокер также будет сохранен кадр в директорию on_detect                              |
 
 # Автозапуск
