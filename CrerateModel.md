@@ -1,11 +1,16 @@
 
 Для распознавания лиц их нужно собрать, для этого используем модели haarcascade_frontalface_default и haarcascade_profileface для выделения лиц на видео и сохранения их в коллекцию. Я собирал примерно по 150-300 вариантов для каждого человека. Скрипт collect_images.py расположен в репозитории. 
 Скрипты запускается так:
-pyhton3 collect_images.py <source> <face_name>
+```
+pyhton3 collect_images.py -i <source> -n <face_name>
+```
 
 source:
+
 •	0 – Веб камера
+
 •	Можно использовать RTSP поток
+
 •	Можно использовать видеофайл
 
 face_name:
