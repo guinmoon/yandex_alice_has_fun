@@ -58,7 +58,7 @@ python3 alice_has_fun.py
 Настройки alice_has_fun.py хранятся в файле config.json:
 ```
 {
-    "debug": false,
+    "mqtt_pub": false,
     "show_camera": false,
     "input_sounrce": 0,
     "frame_recognition_rate": 4,
@@ -67,12 +67,14 @@ python3 alice_has_fun.py
     "camera_h": 720,
     "mqtt_broker": "127.0.0.1",
     "mqtt_port": 11883,
-    "save_on_detect": true
+    "save_on_detect": true,
+    "draw_rect": true,
+    "min_predict_threshold": 65
 }
 ```
 | Параметр               |                                                              Назначение                                                              |
 | ---------------------- | :----------------------------------------------------------------------------------------------------------------------------------: |
-| debug                  |                                         Елси True то рзультаты не публикуются в MQTT брокер                                          |
+| mqtt_pub               |                                         Елси True то рзультаты не публикуются в MQTT брокер                                          |
 | show_camera            |                                  Елси True то с помощью cv2.imshow отображается видео из источника                                   |
 | input_sounrce          | Число (0 это первая веб камера), адрес потока ("rtsp://192.168.1.86:8554/unicast") или расположение видео файла ("raw/IMG_2404.MOV") |
 | frame_recognition_rate |                                                Частота распознавания кадров в секунду                                                |
@@ -82,6 +84,8 @@ python3 alice_has_fun.py
 | mqtt_broker            |                                                          Адрес MQTT брокера                                                          |
 | mqtt_port              |                                                          Порт MQTT брокера                                                           |
 | save_on_detect         |                             Помимо публикации в брокер также будет сохранен кадр в директорию on_detect                              |
+| draw_rect              |                                                            выделять лица                                                             |
+| min_predict_threshold  |                                            минимальный процент совпадения для публикации                                             |
 
 # Автозапуск
 Для корректного запуска docker-copmpose при старте системы лучше создать сервис, чтобы убедиться что необходимые службы запущены
