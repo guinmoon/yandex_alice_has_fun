@@ -18,17 +18,20 @@ input_sounrce = None
 MQTT_BROKER = None
 MQTT_PORT = 1883
 client_id = f'alice_fun-mqtt-{random.randint(0, 1000)}'
-DEBUG = True
+mqtt_pub = True
+DRAW_RECT = False
+min_predict_threshold = 65
 model = load_model('keras_model.h5')
 facedetect = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 labels = open('labels.txt', 'r').read().splitlines()
 
-frame_recognition_rate = 4
-recogintion_sleep_delay = 1/frame_recognition_rate
+FRAME_RECOGNITION_RATE = 4
+recogintion_sleep_delay = 1/FRAME_RECOGNITION_RATE
 frame_update_rate = 10
 publish_min_dalay = 1
 
 outputFrame = None
+drawFrame = None
 last_publish = datetime.now()
 faces_dict = {}
 summ_face_dict = {}
@@ -58,66 +61,83 @@ def get_str_date_fname(dt_now):
     return [dir, name]
 
 
+def save_image():
+    dt_now = datetime.now()
+    dir, name = get_str_date_fname(dt_now)
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+    name = dir+"/"+name+".jpg"
+    print("Creating Images........." + name)
+    cv2.imwrite(name, drawFrame)
+
+
 def face_recogintion():
-    global faces_dict, last_publish, summ_face_dict, Face_Occuracy_Count
+    global last_publish, summ_face_dict, Face_Occuracy_Count, drawFrame
     while True:
         if outputFrame is None:
             time.sleep(0.1)
             continue
-        _image = outputFrame.copy()
-        image = _image
-        faces = facedetect.detectMultiScale(image, 1.3, 5)
+        drawFrame = outputFrame.copy()
+        faces = facedetect.detectMultiScale(
+            drawFrame, scaleFactor=1.3, minNeighbors=5)
         if len(faces) == 0:
             time.sleep(0.1)
             continue
+        dt_now = datetime.now()
+        faces_dict = {}
         for x, y, w, h in faces:
-            image = image[y:y+h, x:x+h]
+            image = drawFrame[y:y+h, x:x+h]
             if image.size == 0:
                 continue
             image = cv2.resize(image, (224, 224), interpolation=cv2.INTER_AREA)
             image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
             image = (image / 127.5) - 1
             probabilities = model.predict(image)
-            faces_dict = dict.fromkeys(faces_dict, 0)
             max_label = ""
             max_prob = -1
             Face_Occuracy_Count += 1
+            faces_dict = dict.fromkeys(faces_dict, 0)
             for i in range(0, len(probabilities[0])):
                 faces_dict[labels[i]] = round(probabilities[0][i]*100, 2)
-                if labels[i] not in summ_face_dict:
-                    summ_face_dict[labels[i]] = 0
-                summ_face_dict[labels[i]] += faces_dict[labels[i]]
-            dt_now = datetime.now()
-            diff_time = dt_now-last_publish
+                # if labels[i] not in summ_face_dict:
+                #     summ_face_dict[labels[i]] = 0
+                prob = round(probabilities[0][i]*100, 2)
+                # summ_face_dict[labels[i]] += prob
+                if prob > min_predict_threshold:
+                    if labels[i] not in summ_face_dict:
+                        summ_face_dict[labels[i]] = 0
+                    if summ_face_dict[labels[i]] < prob:
+                        summ_face_dict[labels[i]] = prob
+                if DRAW_RECT:
+                    cv2.rectangle(drawFrame, (x, y),
+                                  (x+w, y+h), (0, 255, 0), 2)
+                    if prob > min_predict_threshold:
+                        cv2.rectangle(drawFrame, (x, y-40),
+                                      (x+w, y), (0, 255, 100), -2)
+                        cv2.putText(drawFrame, str(prob)+' '+labels[i], (x, y-10), cv2.FONT_HERSHEY_COMPLEX,
+                                    0.75, (0, 10, 10), 1, cv2.LINE_AA)
+            # print(f"{summ_face_dict}")
+        diff_time = dt_now-last_publish
+        if Config['save_on_detect'] and diff_time.seconds > publish_min_dalay and len(summ_face_dict) > 0:
+            save_save_image_thread = threading.Thread(target=save_image)
+            save_save_image_thread.start()
+        if diff_time.seconds > publish_min_dalay:
             faces_json = ""
-            if diff_time.seconds > publish_min_dalay:
-                for key in summ_face_dict.keys():
-                    summ_face_dict[key] /= Face_Occuracy_Count
-                    if summ_face_dict[key] > max_prob:
-                        max_prob = summ_face_dict[key]
-                        max_label = key
-                faces_json = json.dumps(summ_face_dict, ensure_ascii=False)
-                Face_Occuracy_Count = 0
-                summ_face_dict = dict.fromkeys(summ_face_dict, 0)
-                if Config['save_on_detect']:
-                    dir, name = get_str_date_fname(dt_now)
-                    if not os.path.exists(dir):
-                        os.mkdir(dir)
-                    name = dir+"/"+name+"_"+max_label+"_"+str(max_prob)+".jpg"
-                    print("Creating Images........." + name)
-                    cv2.rectangle(_image, (x, y), (x+w, y+h), (0, 255, 0), 2)
-                    cv2.rectangle(_image, (x, y-40), (x+w, y), (0, 255, 0), -2)
-                    cv2.putText(_image, max_label, (x, y-10), cv2.FONT_HERSHEY_COMPLEX,
-                                0.75, (0, 0, 0), 1, cv2.LINE_AA)
-                    cv2.imwrite(name, _image)
-                last_publish = dt_now
-                if DEBUG:
-                    print(faces_dict)
-                    # if diff_time.seconds > 1:
-                    #     mqtt_publish("for_alice/peoples", faces_json)
-                else:
-                    if diff_time.seconds > 1:
-                        mqtt_publish("for_alice/peoples", faces_json)
+            # for key in summ_face_dict.keys():
+            #     summ_face_dict[key] /= Face_Occuracy_Count
+            #     if summ_face_dict[key] > max_prob:
+            #         max_prob = summ_face_dict[key]
+            #         max_label = key
+            faces_json = json.dumps(summ_face_dict, ensure_ascii=False)
+            # summ_face_dict = dict.fromkeys(summ_face_dict, 0)
+            summ_face_dict = {}
+            if mqtt_pub:
+                mqtt_publish("for_alice/peoples", faces_json)
+            else:
+                print(f"{Face_Occuracy_Count}, {faces_json}")
+                #mqtt_publish("for_alice/peoples", faces_json)
+            Face_Occuracy_Count = 0
+            last_publish = dt_now
 
         time.sleep(recogintion_sleep_delay)
 
@@ -159,10 +179,12 @@ if __name__ == '__main__':
     camera = cv2.VideoCapture(input_sounrce)
     camera.set(3, Config['camera_w'])
     camera.set(4, Config['camera_h'])
+    DRAW_RECT = Config['draw_rect']
     MQTT_BROKER = Config['mqtt_broker']
-    DEBUG = Config['debug']
+    mqtt_pub = Config['mqtt_pub']
     MQTT_PORT = Config['mqtt_port']
-    frame_recognition_rate = Config['frame_recognition_rate']
+    FRAME_RECOGNITION_RATE = Config['frame_recognition_rate']
+    min_predict_threshold = Config['min_predict_threshold']
     publish_min_dalay = Config['publish_min_dalay']
     mqttclient = connect_mqtt("", "", MQTT_BROKER, MQTT_PORT, client_id)
     frame_update_thread = threading.Thread(target=frame_update)
@@ -170,12 +192,11 @@ if __name__ == '__main__':
     face_recognition_thread = threading.Thread(target=face_recogintion)
     face_recognition_thread.start()
     while True:
-        if outputFrame is None:
+        if drawFrame is None:
             time.sleep(0.2)
             continue
         if Config['show_camera']:
-            image = outputFrame.copy()
-            cv2.imshow('Camera', image)
+            cv2.imshow('Camera', drawFrame)
         keyboard_input = cv2.waitKey(1)
         if keyboard_input == 27:
             break
