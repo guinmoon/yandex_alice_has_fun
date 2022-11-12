@@ -1,12 +1,14 @@
 {
-    "debug": true,
+    "mqtt_pub": true,
     "show_camera": true,
-    "input_sounrce": 0,
-    "frame_recognition_rate": 6,
-    "publish_min_dalay": 1,
-    "camera_w": 640,
-    "camera_h": 480,
+    "input_sounrce": "raw/3faces.png",
+    "frame_recognition_rate": 4,
+    "publish_min_dalay": 2,
+    "camera_w": 1280,
+    "camera_h": 720,
     "mqtt_broker": "192.168.1.45",
     "mqtt_port": 11883,
-    "save_on_detect": true
+    "save_on_detect": true,
+    "draw_rect": true,
+    "min_predict_threshold": 65
 }

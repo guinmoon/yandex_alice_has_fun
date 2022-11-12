@@ -49,7 +49,7 @@ docker-compose up
 docker-compose up -d
 python3 alice_has_fun.py
 ```
-При первом запуске в Node-Red необходимо установить дополнительные модули ```node-red-contrib-postgresql, node-red-contrib-yandex-station-management, node-red-dashboard```. Сделать это лучше всего через Настройки -> Управление палитрой. Должно получиться так:
+При первом запуске в Node-Red необходимо установить дополнительные модули ```node-red-contrib-postgresql, node-red-contrib-yandex-station-management, node-red-dashboard```. Сделать это проще всего через Настройки -> Управление палитрой. Должно получиться так:
 
 ![modules](/images/red_modules.png)
 

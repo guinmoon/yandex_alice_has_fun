@@ -23,8 +23,8 @@
         "category": "",
         "in": [
             {
-                "x": 60,
-                "y": 120,
+                "x": 80,
+                "y": 140,
                 "wires": [
                     {
                         "id": "7dc371d6863d4020"
@@ -34,8 +34,8 @@
         ],
         "out": [
             {
-                "x": 600,
-                "y": 220,
+                "x": 840,
+                "y": 300,
                 "wires": [
                     {
                         "id": "5c899296ce929f2e",
@@ -103,7 +103,7 @@
     {
         "id": "fb1524656ce0f66b",
         "type": "yandex-login",
-        "name": "",
+        "name": "SVETLAKOV.ART",
         "debugFlag": true
     },
     {
@@ -243,21 +243,30 @@
         "className": ""
     },
     {
+        "id": "a3c95ca4.6c156",
+        "type": "ui_tab",
+        "name": "Алиса",
+        "icon": "dashboard",
+        "order": 12,
+        "disabled": false,
+        "hidden": false
+    },
+    {
         "id": "a296c875ed672f92",
         "type": "function",
         "z": "309129bd122e7987",
         "name": "Say Random",
-        "func": "function getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}\nvar phrase_id = getRandomInt(msg.payload.length);\nvar ret_msg={};\nvar face_name = global.get(\"last_face_alias\");\nif (msg.payload[phrase_id]!=undefined)\n    ret_msg.payload = face_name + \". \" + msg.payload[phrase_id].phrase;\nreturn ret_msg;",
+        "func": "function getRandomInt(max) {\n    return Math.floor(Math.random() * max);\n}\nvar phrase_id = getRandomInt(msg.payload.length);\nvar ret_msg={};\nvar face_name = global.get(\"last_face_alias\");\nif (msg.payload[phrase_id]!=undefined)\n    ret_msg.payload = face_name + \". \" + msg.payload[phrase_id].phrase;\nlet phrase_query = global.get(\"phrase_to_say_query\");\nif (typeof phrase_query == 'undefined') {\n    phrase_query = []\n}\nphrase_query.push(ret_msg.payload)\nglobal.set(\"phrase_to_say_query\", phrase_query);\nret_msg.payload = phrase_query; \nreturn ret_msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 230,
-        "y": 160,
+        "x": 190,
+        "y": 280,
         "wires": [
             [
-                "3a357235ce2bdbc6"
+                "54f55d99e64f9146"
             ]
         ]
     },
@@ -278,8 +287,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 310,
-        "y": 380,
+        "x": 290,
+        "y": 420,
         "wires": [
             [
                 "54f55d99e64f9146"
@@ -308,34 +317,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 410,
-        "y": 320,
+        "x": 390,
+        "y": 340,
         "wires": [
             [
-                "5c899296ce929f2e"
+                "4b5de08d89123920"
             ],
             [
                 "d74b180614f6762d"
-            ]
-        ]
-    },
-    {
-        "id": "3a357235ce2bdbc6",
-        "type": "function",
-        "z": "309129bd122e7987",
-        "name": "push_phrase",
-        "func": "// name = context.get(\"name\"); \n// let phrase_query = global.get(\"phrase_to_say_query\");\n// if (phrase_query==undefined){\n//     phrase_query = []\n// }\n// phrase_query.push(msg.payload)\n// global.set(\"phrase_to_say_query\",phrase_query);\nflow.set(\"$parent.phrase_to_say\", msg.payload);\nmsg.payload = flow.get(\"$parent.phrase_to_say\");\n// msg.payload = phrase_query; \nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 230,
-        "y": 220,
-        "wires": [
-            [
-                "964a8f427c234294",
-                "ba6536ca6591de65"
             ]
         ]
     },
@@ -344,60 +333,20 @@
         "type": "function",
         "z": "309129bd122e7987",
         "name": "pop_phrase",
-        "func": "var ret_msg ={}\nret_msg.payload = flow.get(\"$parent.phrase_to_say\"); \n// let phrase_query = global.get(\"phrase_to_say_query\");\n// node.log(phrase_query);\n// let phrase_to_say =\"\";\n// if (phrase_query == undefined) {\n//     phrase_query = []\n// }\n// else{\n//     phrase_to_say=phrase_query.shift(msg.payload)\n//     global.set(\"phrase_to_say_query\", phrase_query);\n// }\n// ret_msg.payload = phrase_to_say;\nreturn ret_msg;",
+        "func": "var ret_msg ={}\n// ret_msg.payload = flow.get(\"$parent.phrase_to_say\"); \nlet phrase_query = global.get(\"phrase_to_say_query\");\nnode.log(\"Something happened\");\nnode.log(phrase_query);\nlet phrase_to_say =\"\";\nif (typeof phrase_to_say == 'undefined') {\n    phrase_query = []\n}\nelse{\n    phrase_to_say=phrase_query.shift(msg.payload)\n    global.set(\"phrase_to_say_query\", phrase_query);\n}\nphrase_to_say = phrase_to_say.replace('undefined', '');\nret_msg.payload = phrase_to_say;\nglobal.set(\"Alice_Locked\", true);\nnode.status({ fill: \"green\", shape: \"dot\", text: phrase_to_say });\nreturn ret_msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 220,
+        "x": 650,
+        "y": 360,
         "wires": [
             [
-                "6dbe9e9049800c14"
+                "6dbe9e9049800c14",
+                "f6a3059489c01f58"
             ]
         ]
-    },
-    {
-        "id": "964a8f427c234294",
-        "type": "delay",
-        "z": "309129bd122e7987",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "500",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 250,
-        "y": 260,
-        "wires": [
-            [
-                "54f55d99e64f9146"
-            ]
-        ]
-    },
-    {
-        "id": "ba6536ca6591de65",
-        "type": "debug",
-        "z": "309129bd122e7987",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 700,
-        "y": 180,
-        "wires": []
     },
     {
         "id": "7dc371d6863d4020",
@@ -409,8 +358,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 220,
-        "y": 120,
+        "x": 180,
+        "y": 200,
         "wires": [
             [
                 "a296c875ed672f92"
@@ -427,8 +376,8 @@
         "debugFlag": true,
         "output": "status",
         "homekitFormat": "speaker",
-        "x": 230,
-        "y": 320,
+        "x": 210,
+        "y": 340,
         "wires": [
             [
                 "b651ec1f2bc04600"
@@ -454,42 +403,157 @@
         "whisper": false,
         "ttsVoice": "",
         "ttsEffect": "",
-        "x": 480,
-        "y": 160,
+        "x": 880,
+        "y": 360,
         "wires": []
+    },
+    {
+        "id": "6771dd58704cee20",
+        "type": "delay",
+        "z": "309129bd122e7987",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "4b5de08d89123920"
+            ]
+        ]
+    },
+    {
+        "id": "4b5de08d89123920",
+        "type": "function",
+        "z": "309129bd122e7987",
+        "name": "Alice_Locked",
+        "func": "var ret_msg ={}\nret_msg.payload =false;\nlet Alice_Locked = global.get(\"Alice_Locked\");\nif (typeof Alice_Locked == 'undefined') {\n    global.set(\"Alice_Locked\", false);    \n    node.status({ fill: \"green\", shape: \"dot\", text: \"Unlocked\" });\n    return ret_msg;\n}\nif (Alice_Locked){\n    global.set(\"Alice_Locked\",false);\n    node.status({ fill: \"red\", shape: \"ring\", text: \"Locked\" });    \n    ret_msg.payload = true;\n}\nnode.status({ fill: \"green\", shape: \"dot\", text: \"Unlocked\" });\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 280,
+        "wires": [
+            [
+                "cb61c38237f69108"
+            ]
+        ]
+    },
+    {
+        "id": "cb61c38237f69108",
+        "type": "switch",
+        "z": "309129bd122e7987",
+        "name": "Locked?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 620,
+        "y": 280,
+        "wires": [
+            [
+                "6771dd58704cee20"
+            ],
+            [
+                "5c899296ce929f2e"
+            ]
+        ]
+    },
+    {
+        "id": "f6a3059489c01f58",
+        "type": "delay",
+        "z": "309129bd122e7987",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "3",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 710,
+        "y": 480,
+        "wires": [
+            [
+                "033a6f6f7fd372f0"
+            ]
+        ]
+    },
+    {
+        "id": "033a6f6f7fd372f0",
+        "type": "function",
+        "z": "309129bd122e7987",
+        "name": "Alice Unlock",
+        "func": "global.set(\"Alice_Locked\", false);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 480,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "fca96afe.22cf28",
         "type": "debug",
         "z": "9f1500a477fa23e7",
         "name": "",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
-        "y": 80,
+        "x": 850,
+        "y": 140,
         "wires": []
     },
     {
         "id": "1fcf7bf2799d49d3",
         "type": "function",
         "z": "9f1500a477fa23e7",
-        "name": "ParceFaces",
-        "func": "var faces=JSON.parse(msg.payload);\nvar max_p=-1\nvar max_face = ''\nObject.keys(faces).forEach(function (key) {\n    // console.log('Key : ' + key + ', Value : ' + faces[key])\n    if (faces[key]>max_p){\n        max_p = faces[key];\n        max_face = key;\n    }\n})\nvar ret_msg = {};\nif (max_p < 70)\n    max_face = \"unknown\";\nglobal.set(\"last_face\", max_face);\nif (max_face == 'Господин') {\n    global.set(\"last_face_alias\", '');\n} else {\n    global.set(\"last_face_alias\", max_face);\n}\nret_msg.payload = max_face\nret_msg.params=[max_face]\n\nreturn ret_msg;",
+        "name": "Parce_Faces",
+        "func": "var faces=JSON.parse(msg.payload);\nvar ret_msg={}\nret_msg.payload = faces\nreturn ret_msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 170,
-        "y": 140,
+        "x": 130,
+        "y": 100,
         "wires": [
             [
-                "b9a575d9974a311b"
+                "d83e12356545b78c"
             ]
         ]
     },
@@ -682,12 +746,11 @@
         "nl": false,
         "rap": false,
         "inputs": 0,
-        "x": 140,
-        "y": 80,
+        "x": 120,
+        "y": 40,
         "wires": [
             [
-                "1fcf7bf2799d49d3",
-                "fca96afe.22cf28"
+                "1fcf7bf2799d49d3"
             ]
         ]
     },
@@ -702,8 +765,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 600,
-        "y": 140,
+        "x": 580,
+        "y": 60,
         "wires": [
             [
                 "042a7a6fabbcefce"
@@ -721,12 +784,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 630,
-        "y": 220,
+        "x": 590,
+        "y": 100,
         "wires": [
             [
-                "e050e3fb664c7281",
-                "fca96afe.22cf28"
+                "e050e3fb664c7281"
             ]
         ]
     },
@@ -734,15 +796,15 @@
         "id": "b720c3cae26f2575",
         "type": "function",
         "z": "9f1500a477fa23e7",
-        "name": "face_name",
-        "func": "var ret_msg={};\nvar face_name = global.get(\"last_face\");\nret_msg.params = [face_name]\nreturn ret_msg;",
+        "name": "face_to_upd",
+        "func": "var ret_msg={};\nvar face_name = global.get(\"last_face_db_name\");\nret_msg.params = [face_name];\nret_msg.payload = face_name;\nreturn ret_msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
-        "y": 200,
+        "x": 370,
+        "y": 120,
         "wires": [
             [
                 "e7e9f5131191218f"
@@ -942,66 +1004,6 @@
         ]
     },
     {
-        "id": "b9a575d9974a311b",
-        "type": "switch",
-        "z": "9f1500a477fa23e7",
-        "name": "unknown",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "neq",
-                "v": "unknown",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "unknown",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 180,
-        "y": 200,
-        "wires": [
-            [
-                "7aa5d303aa2168ee"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "a9ad3a79aa64946a",
-        "type": "inject",
-        "z": "9f1500a477fa23e7",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 840,
-        "y": 500,
-        "wires": [
-            [
-                "6bd1d1a83d3d5272"
-            ]
-        ]
-    },
-    {
         "id": "e7e9f5131191218f",
         "type": "postgresql",
         "z": "9f1500a477fa23e7",
@@ -1011,8 +1013,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 410,
-        "y": 260,
+        "x": 390,
+        "y": 180,
         "wires": [
             []
         ]
@@ -1027,8 +1029,8 @@
         "split": false,
         "rowsPerMsg": 1,
         "outputs": 1,
-        "x": 400,
-        "y": 140,
+        "x": 360,
+        "y": 60,
         "wires": [
             [
                 "4356d8ccc6ae06a0",
@@ -1081,7 +1083,7 @@
         "id": "065205cb6e7161ac",
         "type": "alice-local-station",
         "z": "9f1500a477fa23e7",
-        "name": "My Yandex Max",
+        "name": "My Yandex Station",
         "token": "fb1524656ce0f66b",
         "station_id": "XK00000000000000515800003be983c2",
         "debugFlag": false,
@@ -1145,9 +1147,185 @@
         "fixedAddress": "192.168.1.60",
         "fixedPort": "1961",
         "phrase": "",
-        "x": 840,
-        "y": 220,
+        "x": 850,
+        "y": 40,
         "wires": []
+    },
+    {
+        "id": "aa7368d3671ef191",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "clean_phrase_query",
+        "func": "global.set(\"phrase_to_say_query\",[]);\nglobal.set(\"Alice_Locked\", false);\nglobal.set(\"last_face_alias\", '');\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d83e12356545b78c",
+        "type": "split",
+        "z": "9f1500a477fa23e7",
+        "name": "split_faces",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "face_name",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "cdc7cdbb6f716c61"
+            ]
+        ]
+    },
+    {
+        "id": "cdc7cdbb6f716c61",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "Prepare_Query",
+        "func": "var ret_msg={}\nret_msg.payload = { \"face_name\": msg.face_name,\n\"proc\":msg.payload}\nret_msg.params = [msg.face_name]\nret_msg.payload = msg.face_name\nret_msg.rate = 1000;\nreturn ret_msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "5c3fcc1444b53aca"
+            ]
+        ]
+    },
+    {
+        "id": "59bfe2f51d954066",
+        "type": "inject",
+        "z": "9f1500a477fa23e7",
+        "name": "run",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 830,
+        "y": 220,
+        "wires": [
+            [
+                "ceb676ae161195a0"
+            ]
+        ]
+    },
+    {
+        "id": "ceb676ae161195a0",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "show_phrase_query",
+        "func": "msg.payload = global.get(\"phrase_to_say_query\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 220,
+        "wires": [
+            [
+                "fca96afe.22cf28"
+            ]
+        ]
+    },
+    {
+        "id": "5c3fcc1444b53aca",
+        "type": "delay",
+        "z": "9f1500a477fa23e7",
+        "name": "1msg/s",
+        "pauseType": "rate",
+        "timeout": "500",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "0.5",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": true,
+        "outputs": 1,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "1db85faf31b7a32c"
+            ]
+        ]
+    },
+    {
+        "id": "1db85faf31b7a32c",
+        "type": "function",
+        "z": "9f1500a477fa23e7",
+        "name": "set_global_face",
+        "func": "global.set(\"last_face_db_name\", msg.payload);\nif (msg.payload == 'Господин') {\n    global.set(\"last_face_alias\", '');\n} else {\n    global.set(\"last_face_alias\", msg.payload);\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 140,
+        "y": 260,
+        "wires": [
+            [
+                "7aa5d303aa2168ee"
+            ]
+        ]
+    },
+    {
+        "id": "5c542f6f26087ce5",
+        "type": "inject",
+        "z": "9f1500a477fa23e7",
+        "name": "run",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 830,
+        "y": 260,
+        "wires": [
+            [
+                "aa7368d3671ef191"
+            ]
+        ]
     },
     {
         "id": "a72926ffcf9c4f8e",
