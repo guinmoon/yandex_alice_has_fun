@@ -14,7 +14,7 @@ import os
 Config = None
 
 mqttclient = None
-input_sounrce = None
+input_source = None
 MQTT_BROKER = None
 MQTT_PORT = 1883
 client_id = f'alice_fun-mqtt-{random.randint(0, 1000)}'
@@ -45,7 +45,7 @@ def frame_update():
         if not ret:
             check = False
             while not check:
-                camera = cv2.VideoCapture(input_sounrce)
+                camera = cv2.VideoCapture(input_source)
                 ret, frame = camera.read()
                 if ret:
                     check = True
@@ -175,8 +175,8 @@ def mqtt_publish(topic, message):
 if __name__ == '__main__':
     with open('config.json') as json_file:
         Config = json.load(json_file)
-    input_sounrce = Config['input_sounrce']
-    camera = cv2.VideoCapture(input_sounrce)
+    input_source = Config['input_source']
+    camera = cv2.VideoCapture(input_source)
     camera.set(3, Config['camera_w'])
     camera.set(4, Config['camera_h'])
     DRAW_RECT = Config['draw_rect']
