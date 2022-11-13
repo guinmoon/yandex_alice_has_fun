@@ -1,5 +1,4 @@
 from datetime import datetime
-from distutils.command.build_scripts import first_line_re
 import cv2
 import numpy as np
 from keras.models import load_model
