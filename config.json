@@ -1,7 +1,7 @@
 {
     "mqtt_pub": true,
     "show_camera": true,
-    "input_source": "raw/3faces.png",
+    "input_source": "rtsp://192.168.1.86:8554/unicast",
     "frame_recognition_rate": 4,
     "publish_min_dalay": 2,
     "camera_w": 1280,
