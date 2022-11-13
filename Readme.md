@@ -25,7 +25,7 @@
 
 **Linux:**
 ```
-pip3 install opencv-python tensorflow
+pip3 install opencv-python tensorflow paho
 ```
 Возможно портебуется установка дополнительных пакетов
 ```
